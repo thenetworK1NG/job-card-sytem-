@@ -1,0 +1,245 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 420px;
+    width: 95%;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    padding: 40px 32px 32px 32px;
+    border: 1px solid rgba(255,255,255,0.3);
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 28px;
+    color: #4f2e7d;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 7px;
+    color: #5a189a;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.85);
+    box-shadow: 0 2px 8px rgba(80, 80, 180, 0.07);
+    transition: box-shadow 0.2s, border 0.2s;
+    outline: none;
+    color: #3d246c;
+    font-family: inherit;
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    box-shadow: 0 0 0 2px #a084ee, 0 2px 8px rgba(80, 80, 180, 0.07);
+    border: 1.5px solid #a084ee;
+}
+
+form textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+form select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%235a189a" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px 20px;
+    cursor: pointer;
+}
+
+.decorative-svg {
+    margin-bottom: -18px;
+    margin-top: -32px;
+    width: 100%;
+    pointer-events: none;
+}
+
+.form-section {
+    background: rgba(255,255,255,0.85);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(160, 132, 238, 0.06);
+    padding: 22px 18px 12px 18px;
+    margin-bottom: 22px;
+    border-left: 4px solid #a084ee33;
+    border-right: 4px solid #8ec5fc22;
+    position: relative;
+}
+
+.form-section:not(:first-child) {
+    margin-top: 10px;
+}
+
+.section-title {
+    font-size: 1.18rem;
+    color: #7c3aed;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 0 #fff;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(90deg, #a084ee 0%, #8ec5fc 100%);
+    color: #fff;
+    border: none;
+    border-radius: 18px;
+    font-size: 1.18rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(160, 132, 238, 0.18);
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.7px;
+    margin-top: 18px;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, #8ec5fc 0%, #a084ee 100%);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 12px 32px rgba(160, 132, 238, 0.22);
+}
+
+#status {
+    margin-top: 18px;
+    text-align: center;
+    color: #4f2e7d;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    min-height: 24px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 24px 8px 18px 8px;
+        max-width: 98vw;
+    }
+    h1 {
+        font-size: 1.3rem;
+    }
+    form input, form textarea, form select {
+        font-size: 0.98rem;
+        padding: 10px 8px;
+    }
+    button[type="submit"] {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
+
+/* Decorative abstract SVG background (optional, can be added to HTML for more flair) */
+
+.checkbox-group label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 18px;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 7px;
+    accent-color: #a084ee;
+    transform: scale(1.15);
+}
+
+.checkbox-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+}
+
+.checkbox-group legend {
+    font-weight: 600;
+    color: #4f2e7d;
+    margin-bottom: 6px;
+    font-size: 1.08rem;
+    width: 100%;
+}
+
+#assignModal {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 4000;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(44, 62, 80, 0.18);
+}
+#assignModal .a4-modal-content {
+    max-width: 400px;
+    width: 98vw;
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 24px 28px 24px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    border-radius: 16px;
+    background: #fff;
+}
+#assignModal h2 {
+    color: #4f2e7d;
+    text-align: center;
+    margin-bottom: 18px;
+    width: 100%;
+}
+#assignToSelect {
+    width: 100%;
+    padding: 14px 10px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    text-align: center;
+}
+#confirmAssignBtn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 12px 0;
+    margin-top: 8px;
+}
+#closeAssignModalBtn {
+    position: absolute;
+    top: 18px;
+    right: 32px;
+    font-size: 1.6rem;
+    background: none;
+    border: none;
+    color: #a084ee;
+    cursor: pointer;
+    font-weight: bold;
+} 
