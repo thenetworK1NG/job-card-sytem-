@@ -94,13 +94,145 @@ confirmAssignBtn.addEventListener('click', () => {
     })
     .then(() => {
         document.getElementById('status').textContent = 'Saved successfully!';
-        document.getElementById('jobCardForm').reset();
         writeLog({user: assignedTo, action: 'created', jobName: customerName});
+        
+        // Show assignment notification
+        showAssignmentNotification(assignedTo);
+        
+        // Scroll to top of the form (but don't clear)
+        scrollToTop();
+        
+        // Show reset icon
+        showResetIcon();
     })
     .catch((error) => {
         document.getElementById('status').textContent = 'Error: ' + error.message;
     });
 });
+
+// Function to show assignment notification
+function showAssignmentNotification(assignedName) {
+    const notification = document.getElementById('assignmentNotification');
+    const assignedNameElement = document.getElementById('assignedName');
+    const notificationContent = notification.querySelector('.notification-content');
+    
+    if (notification && assignedNameElement && notificationContent) {
+        // Remove any existing color classes
+        notificationContent.classList.remove('yolandie', 'francois', 'andre', 'neil');
+        
+        // Add the appropriate color class based on the assigned person
+        const lowerName = assignedName.toLowerCase();
+        if (lowerName === 'yolandie') {
+            notificationContent.classList.add('yolandie');
+        } else if (lowerName === 'francois') {
+            notificationContent.classList.add('francois');
+        } else if (lowerName === 'andre') {
+            notificationContent.classList.add('andre');
+        } else if (lowerName === 'neil') {
+            notificationContent.classList.add('neil');
+        }
+        
+        // Set the assigned name
+        assignedNameElement.textContent = assignedName;
+        
+        // Show the notification
+        notification.classList.add('show');
+        
+        // Hide the notification after 4 seconds
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 4000);
+    }
+}
+
+// Function to scroll to top of the form
+function scrollToTop() {
+    const container = document.querySelector('.container');
+    if (container) {
+        container.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Function to show reset icon
+function showResetIcon() {
+    const saveLoadControls = document.getElementById('save-load-controls');
+    if (saveLoadControls) {
+        // Create reset icon if it doesn't exist
+        let resetIcon = document.getElementById('resetIcon');
+        if (!resetIcon) {
+            resetIcon = document.createElement('button');
+            resetIcon.id = 'resetIcon';
+            resetIcon.className = 'reset-icon';
+            resetIcon.setAttribute('aria-label', 'Reset Form');
+            resetIcon.innerHTML = `
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="currentColor"/>
+                </svg>
+            `;
+            resetIcon.addEventListener('click', resetForm);
+            
+            // Insert after the save menu button
+            const saveMenuBtn = document.getElementById('saveMenuBtn');
+            if (saveMenuBtn) {
+                saveMenuBtn.parentNode.insertBefore(resetIcon, saveMenuBtn.nextSibling);
+            } else {
+                saveLoadControls.appendChild(resetIcon);
+            }
+        }
+        
+        // Show the reset icon
+        resetIcon.style.display = 'flex';
+        resetIcon.classList.add('show');
+    }
+}
+
+// Function to reset the form
+function resetForm() {
+    const form = document.getElementById('jobCardForm');
+    if (form) {
+        form.reset();
+        
+        // Uncheck all checkboxes
+        const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        
+        // Clear status
+        const status = document.getElementById('status');
+        if (status) {
+            status.textContent = '';
+        }
+        
+        // Hide reset icon
+        const resetIcon = document.getElementById('resetIcon');
+        if (resetIcon) {
+            resetIcon.classList.remove('show');
+            setTimeout(() => {
+                resetIcon.style.display = 'none';
+            }, 300);
+        }
+        
+        // Show confirmation
+        showResetConfirmation();
+    }
+}
+
+// Function to show reset confirmation
+function showResetConfirmation() {
+    const status = document.getElementById('status');
+    if (status) {
+        status.textContent = 'Form reset successfully!';
+        status.classList.add('visible');
+        setTimeout(() => {
+            status.classList.remove('visible');
+            status.textContent = '';
+        }, 2000);
+    }
+}
 
 // Example user data object (replace with your actual data structure)
 let userData = {
